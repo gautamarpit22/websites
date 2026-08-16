@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OUVRAGE · Maison de maroquinerie</title>
+<meta name="description" content="Maison Ouvrage. Few bags, made slowly. One craftsman, one bag, two hundred hours. No logos. The leather is the signature.">
+<meta property="og:title" content="OUVRAGE · Maison de maroquinerie">
+<meta property="og:description" content="Few bags, made slowly. One craftsman, one bag, two hundred hours.">
+<meta property="og:image" content="https://ouvrage.designhivehq.com/assets/poster.jpg">
+<meta property="og:url" content="https://ouvrage.designhivehq.com/">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://ouvrage.designhivehq.com/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Alegreya+Sans:wght@300;400;500&family=IBM+Plex+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a140f;
+  --ink-2:#241b13;
+  --hide:#3d2b1c;
+  --cognac:#a9713a;
+  --brass:#c9a25e;
+  --brass-soft:rgba(201,162,94,.55);
+  --bone:#ece4d6;
+  --bone-dim:rgba(236,228,214,.72);
+  --serif:'Cormorant Garamond',Georgia,serif;
+  --sans:'Alegreya Sans',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:auto}
+body{background:var(--ink);color:var(--bone);font-family:var(--sans);font-weight:300;line-height:1.6;overflow-x:hidden}
+::selection{background:var(--brass);color:var(--ink)}
+
+/* ---------- hero scroll journey ---------- */
+#journey{position:relative;height:520vh}
+#stage{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--ink)}
+#heroVideo,#heroPoster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#heroPoster{opacity:1;transition:opacity .8s ease}
+#heroVideo{opacity:0;transition:opacity .8s ease}
+.stage-grain{position:absolute;inset:0;pointer-events:none;opacity:.5;
+  background:radial-gradient(ellipse at 68% 55%, transparent 30%, rgba(26,20,15,.55) 100%)}
+/* left text lane scrim, per-band */
+.band{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
+.band.on{opacity:1;transform:translateY(0)}
+.band-inner{max-width:520px;padding:0 6vw;position:relative}
+.band-inner::before{content:"";position:absolute;inset:-3rem -4rem;z-index:-1;
+  background:radial-gradient(ellipse at 30% 50%, rgba(26,20,15,.78), rgba(26,20,15,.35) 60%, transparent 78%)}
+.band .kicker{font-family:var(--mono);font-size:.72rem;letter-spacing:.35em;color:var(--brass);text-transform:uppercase;margin-bottom:1.1rem}
+.band h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.6rem,5.2vw,4.6rem);line-height:1.08;letter-spacing:.01em}
+.band h2{font-family:var(--serif);font-weight:500;font-size:clamp(1.9rem,3.6vw,3.1rem);line-height:1.15}
+.band p{margin-top:1rem;color:var(--bone-dim);font-size:1.05rem;max-width:38ch}
+.glow{text-shadow:0 0 34px rgba(201,162,94,.28)}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:clamp(3.4rem,7vw,6.5rem);letter-spacing:.14em}
+#settleBand .cta-row{margin-top:2rem;pointer-events:auto}
+
+/* loading ring */
+#loadRing{position:absolute;right:2.2rem;bottom:2.2rem;width:44px;height:44px;opacity:0;transition:opacity .4s}
+#loadRing.show{opacity:1}
+#loadRing svg{width:100%;height:100%;transform:rotate(-90deg)}
+#loadRing .track{stroke:rgba(236,228,214,.15);fill:none;stroke-width:2}
+#loadRing .fill{stroke:var(--brass);fill:none;stroke-width:2;stroke-dasharray:126;stroke-dashoffset:126;transition:stroke-dashoffset .3s}
+.scroll-hint{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);font-family:var(--mono);font-size:.68rem;letter-spacing:.3em;color:var(--bone-dim);text-transform:uppercase;opacity:1;transition:opacity .6s}
+.scroll-hint.hide{opacity:0}
+.scroll-hint::after{content:"";display:block;width:1px;height:34px;margin:.7rem auto 0;background:linear-gradient(var(--brass),transparent)}
+
+/* ---------- shared section chrome ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:1.3rem 4vw 2.4rem;mix-blend-mode:normal;transition:background .5s,box-shadow .5s;background:linear-gradient(to bottom, rgba(26,20,15,.78), rgba(26,20,15,0))}
+nav.scrolled{background:rgba(26,20,15,.88);backdrop-filter:blur(10px);box-shadow:0 1px 0 rgba(201,162,94,.12);padding-bottom:1.3rem}
+nav .logo{font-family:var(--serif);font-weight:600;letter-spacing:.22em;font-size:1.1rem;color:var(--bone);text-decoration:none;text-shadow:0 1px 10px rgba(0,0,0,.65)}
+nav ul{display:flex;gap:2.2rem;list-style:none}
+nav a{color:var(--bone);text-decoration:none;font-family:var(--mono);font-size:.76rem;font-weight:400;letter-spacing:.22em;text-transform:uppercase;transition:color .3s;text-shadow:0 1px 8px rgba(0,0,0,.65)}
+nav a:hover{color:var(--brass)}
+main{position:relative;background:var(--ink)}
+section{position:relative;padding:9rem 6vw}
+.mono-label{font-family:var(--mono);font-size:.7rem;letter-spacing:.35em;color:var(--brass);text-transform:uppercase;display:block;margin-bottom:1.4rem}
+.display{font-family:var(--serif);font-weight:500;font-size:clamp(2.1rem,4vw,3.4rem);line-height:1.12;max-width:18ch}
+.lede{color:var(--bone-dim);max-width:52ch;margin-top:1.4rem;font-size:1.08rem}
+.reveal{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+
+/* stitch spine */
+#stitch{position:absolute;left:calc(4vw - 1px);top:0;bottom:0;width:2px;pointer-events:none}
+#stitch path{stroke:var(--brass-soft);stroke-width:1.5;fill:none;stroke-dasharray:7 9;stroke-linecap:round}
+
+/* craft grid */
+.craft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2.4rem;margin-top:4rem}
+.craft-card{position:relative}
+.craft-card img{width:100%;aspect-ratio:4/5;object-fit:cover;display:block;filter:saturate(.92)}
+.craft-card .frame{position:relative;overflow:hidden}
+.craft-card .frame::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(201,162,94,.25)}
+.craft-card .num{font-family:var(--mono);color:var(--brass);font-size:.72rem;letter-spacing:.3em;margin:1.4rem 0 .5rem}
+.craft-card h3{font-family:var(--serif);font-weight:500;font-size:1.5rem;margin-bottom:.5rem}
+.craft-card p{color:var(--bone-dim);font-size:.98rem;max-width:34ch}
+
+/* the bag */
+#bag{background:var(--ink-2)}
+.bag-wrap{display:grid;grid-template-columns:1.15fr .85fr;gap:4rem;align-items:center}
+.bag-img{position:relative;overflow:hidden;cursor:crosshair}
+.bag-img img{width:100%;display:block}
+.bag-img .spot{position:absolute;inset:0;opacity:0;transition:opacity .5s;pointer-events:none;
+  background:radial-gradient(220px circle at var(--mx,50%) var(--my,50%), rgba(201,162,94,.18), transparent 65%)}
+.bag-img:hover .spot{opacity:1}
+.bag-img::after{content:"";position:absolute;inset:0;box-shadow:inset 0 0 0 1px rgba(201,162,94,.25)}
+.price-block{margin-top:2rem;border-top:1px solid rgba(201,162,94,.25);padding-top:1.6rem}
+.price{font-family:var(--serif);font-size:2rem;color:var(--bone)}
+.avail{font-family:var(--mono);font-size:.72rem;letter-spacing:.18em;color:var(--brass);text-transform:uppercase;margin-top:.5rem}
+.buy-row{display:flex;flex-wrap:wrap;gap:1rem;margin-top:2rem}
+.buy-form{display:none;margin-top:2rem;max-width:420px}
+.buy-form.show{display:grid}
+.materials{margin-top:1.6rem;font-family:var(--mono);font-size:.78rem;letter-spacing:.08em;color:var(--bone-dim);line-height:2.1}
+.materials span{color:var(--brass)}
+
+/* answers */
+.faq{max-width:720px;margin-top:3rem}
+.faq details{border-top:1px solid rgba(201,162,94,.2);padding:1.4rem 0}
+.faq details:last-child{border-bottom:1px solid rgba(201,162,94,.2)}
+.faq summary{font-family:var(--serif);font-size:1.35rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--mono);color:var(--brass);transition:transform .35s}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--bone-dim);margin-top:.9rem;max-width:56ch}
+
+/* appointment */
+#appointment{background:var(--ink-2)}
+.appt-wrap{display:grid;grid-template-columns:1fr 1fr;gap:4rem}
+form{display:grid;gap:1.6rem}
+form > div{display:grid;gap:.45rem}
+label{font-family:var(--mono);font-size:.68rem;letter-spacing:.28em;text-transform:uppercase;color:var(--bone-dim)}
+input,textarea{width:100%;background:transparent;border:none;border-bottom:1px solid rgba(201,162,94,.35);color:var(--bone);font-family:var(--sans);font-size:1.05rem;padding:.7rem 0;transition:border-color .3s;border-radius:0}
+input:focus,textarea:focus{outline:none;border-color:var(--brass)}
+textarea{resize:vertical;min-height:90px}
+.btn{display:inline-block;font-family:var(--mono);font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink);background:var(--brass);border:1px solid var(--brass);padding:1.05rem 2.4rem;cursor:pointer;text-decoration:none;transition:background .35s,color .35s;text-align:center}
+.btn:hover{background:transparent;color:var(--brass)}
+.btn.ghost{background:transparent;color:var(--brass)}
+.btn.ghost:hover{background:var(--brass);color:var(--ink)}
+.form-success{display:none;border:1px solid rgba(201,162,94,.35);padding:2.2rem;font-family:var(--serif);font-size:1.3rem;line-height:1.5}
+.form-success.show{display:block}
+
+/* footer */
+footer{padding:4rem 6vw;border-top:1px solid rgba(201,162,94,.15);display:flex;flex-wrap:wrap;gap:2rem;justify-content:space-between;align-items:flex-end;background:var(--ink)}
+footer .fnote{font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;color:rgba(236,228,214,.45);max-width:46ch;line-height:1.9}
+footer .logo{font-family:var(--serif);font-weight:600;letter-spacing:.22em;font-size:1.4rem}
+
+/* dust */
+.dust{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.dust i{position:absolute;display:block;width:2px;height:2px;border-radius:50%;background:rgba(201,162,94,.35);animation:drift linear infinite}
+@keyframes drift{from{transform:translateY(8vh)}to{transform:translateY(-108vh)}}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal,.band{transition:none;opacity:1;transform:none}
+  .dust i{animation:none}
+  #stitch{display:none}
+}
+@media (max-width:900px){
+  #journey{height:auto}
+  #stage{position:relative;height:74vh}
+  #heroVideo{display:none}
+  #heroPoster{object-position:62% center}
+  .band{position:relative;inset:auto;opacity:1;transform:none;padding:0}
+  .band-inner::before{display:none}
+  #openBand{position:absolute;left:0;right:0;top:auto;bottom:0;display:block;
+    background:linear-gradient(to top, rgba(26,20,15,.94) 20%, rgba(26,20,15,.45) 65%, rgba(26,20,15,0))}
+  #openBand .band-inner{padding:3.4rem 6vw 2rem;max-width:none}
+  #mobileStory{background:var(--ink);padding:2.8rem 6vw .5rem;display:grid;gap:2.6rem}
+  #mobileStory .band-inner{padding:0;max-width:none}
+  #mobileStory .band p{margin-top:.4rem}
+  #mobileStory #settleBand{border-top:1px solid rgba(201,162,94,.2);padding-top:2.4rem}
+  #settleBand .cta-row{display:grid;gap:.9rem;margin-top:1.4rem}
+  #settleBand .cta-row .btn{margin-left:0 !important;text-align:center;display:block}
+  .buy-row{flex-direction:column}
+  .buy-row .btn{width:100%}
+  .craft-grid,.bag-wrap,.appt-wrap{grid-template-columns:1fr}
+  nav{padding:1.1rem 6vw 1.6rem}
+  nav ul{display:flex;gap:1.4rem}
+  nav li:nth-child(1),nav li:nth-child(2),nav li:nth-child(4){display:none}
+  nav a{font-size:.66rem}
+  section{padding:5.5rem 6vw}
+  footer{flex-direction:column;align-items:flex-start;gap:1.6rem}
+}
+@media (min-width:901px){
+  #mobileStory .band{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav" aria-label="Main">
+  <a class="logo" href="#top">OUVRAGE</a>
+  <ul>
+    <li><a href="#house">The House</a></li>
+    <li><a href="#craft">The Craft</a></li>
+    <li><a href="#bag">The Bag</a></li>
+    <li><a href="#answers">Answers</a></li>
+    <li><a href="#appointment">Appointment</a></li>
+  </ul>
+</nav>
+
+<div id="journey" role="img" aria-label="A slow journey through the Ouvrage leather atelier, ending on the finished bag in a shaft of light.">
+  <div id="stage">
+    <img id="heroPoster" src="assets/poster.jpg" alt="The Ouvrage atelier at dusk, a finished leather bag resting in a shaft of warm light.">
+    <video id="heroVideo" muted playsinline preload="none" aria-hidden="true"></video>
+    <div class="stage-grain"></div>
+    <div class="dust" id="heroDust"></div>
+
+    <div class="band" data-from="0" data-to="0.10" id="openBand">
+      <div class="band-inner">
+        <div class="kicker">Maison de maroquinerie</div>
+        <div class="wordmark glow">OUVRAGE</div>
+      </div>
+    </div>
+    <div class="band" data-from="0.16" data-to="0.30">
+      <div class="band-inner">
+        <h2 class="glow">One craftsman. One bag.<br>Two hundred hours.</h2>
+      </div>
+    </div>
+    <div class="band" data-from="0.38" data-to="0.52">
+      <div class="band-inner">
+        <h2 class="glow">No logos.</h2>
+        <p>The leather is the signature.</p>
+      </div>
+    </div>
+    <div class="band" data-from="0.60" data-to="0.74">
+      <div class="band-inner">
+        <h2 class="glow">Brass. Vachetta. Linen thread.</h2>
+        <p>Nothing else.</p>
+      </div>
+    </div>
+    <div class="band" data-from="0.84" data-to="1.01" id="settleBand">
+      <div class="band-inner">
+        <div class="kicker">The Ouvrage N°1</div>
+        <h1 class="glow">Carried for life.</h1>
+        <div class="cta-row"><a class="btn" href="#bag">Purchase the N°1</a> <a class="btn ghost" href="#appointment" style="margin-left:.6rem">Commission your own</a></div>
+      </div>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint">Scroll</div>
+    <div id="loadRing"><svg viewBox="0 0 44 44"><circle class="track" cx="22" cy="22" r="20"/><circle class="fill" cx="22" cy="22" r="20"/></svg></div>
+  </div>
+</div>
+
+<div id="mobileStory"></div>
+
+<main>
+  <svg id="stitch" preserveAspectRatio="none"><path id="stitchPath" d=""/></svg>
+
+  <section id="house">
+    <span class="mono-label reveal">N° 01 · The House</span>
+    <h2 class="display reveal">We are a small house. We make few bags, slowly.</h2>
+    <p class="lede reveal">Each one is cut, stitched and finished by a single craftsman, and signed inside with his initials. Not ours. His.</p>
+  </section>
+
+  <section id="craft">
+    <span class="mono-label reveal">N° 02 · The Craft</span>
+    <h2 class="display reveal">Two hundred hours, in three acts.</h2>
+    <div class="craft-grid">
+      <div class="craft-card reveal">
+        <div class="frame"><img src="assets/craft-cut.jpg" alt="A full-grain hide being cut by hand in the atelier." loading="lazy"></div>
+        <div class="num">01 · CUT</div>
+        <h3>The hide decides</h3>
+        <p>Every hide is full-grain vachetta, cut by hand around the scars. We waste more leather than most houses buy.</p>
+      </div>
+      <div class="craft-card reveal">
+        <div class="frame"><img src="assets/craft-stitch.jpg" alt="Saddle stitching in progress, two needles and waxed linen thread." loading="lazy"></div>
+        <div class="num">02 · STITCH</div>
+        <h3>Two needles, one seam</h3>
+        <p>Saddle-stitched with waxed linen thread. Two hundred hours. A machine cannot tie this knot.</p>
+      </div>
+      <div class="craft-card reveal">
+        <div class="frame"><img src="assets/craft-finish.jpg" alt="Edge burnishing tools, beeswax and brass hardware on linen." loading="lazy"></div>
+        <div class="num">03 · FINISH</div>
+        <h3>Then it rests</h3>
+        <p>Edges are burnished with beeswax until they shine like the hardware. Then it rests for seven days before it leaves.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="bag">
+    <div class="bag-wrap">
+      <div class="bag-img reveal" id="bagImg">
+        <img src="assets/ending.jpg" alt="The Ouvrage N°1 bag on its stone pedestal, in a shaft of warm light.">
+        <div class="spot"></div>
+      </div>
+      <div>
+        <span class="mono-label reveal">N° 03 · The Bag</span>
+        <h2 class="display reveal">The Ouvrage N°1</h2>
+        <p class="lede reveal">You are not paying for advertising. We do not advertise. You are paying for the hide, the hours, and the hands.</p>
+        <div class="price-block reveal">
+          <div class="price">4,800 €</div>
+          <div class="avail">Made this month · three of eight still available</div>
+          <div class="materials">
+            <span>HIDE</span> · full-grain French vachetta<br>
+            <span>THREAD</span> · waxed linen, saddle-stitched<br>
+            <span>HARDWARE</span> · solid aged brass<br>
+            <span>LINING</span> · none. The inside is the outside.<br>
+            <span>MARK</span> · the craftsman's initials, hidden inside
+          </div>
+        </div>
+        <div class="buy-row reveal" id="buyRow">
+          <button class="btn" id="buyBtn" type="button">Purchase · 4,800 €</button>
+          <a class="btn ghost" href="#appointment">Commission your own</a>
+        </div>
+        <form class="buy-form" id="buyForm" novalidate>
+          <div><label for="b-email">Your email</label><input id="b-email" name="email" type="email" autocomplete="email" required></div>
+          <button class="btn" type="submit">Confirm reservation</button>
+        </form>
+        <div class="form-success" id="buySuccess">Reserved. The atelier will write to you within two days to arrange payment and delivery.</div>
+        <p class="lede reveal" style="font-size:.92rem;margin-top:1.6rem">Move your light across it.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="answers">
+    <span class="mono-label reveal">N° 04 · Answers</span>
+    <h2 class="display reveal">The questions people actually ask.</h2>
+    <div class="faq reveal">
+      <details>
+        <summary>Why is there no logo?</summary>
+        <p>A logo tells strangers what you paid. The stitching tells them what you value. The people who know, know.</p>
+      </details>
+      <details>
+        <summary>Will it really last?</summary>
+        <p>A saddle stitch fails one hole at a time, never all at once. Bring the bag back in twenty years and we will make it new. That promise is part of the price.</p>
+      </details>
+      <details>
+        <summary>Why the wait?</summary>
+        <p>We make eight bags a month. One craftsman starts your bag and the same craftsman finishes it. The waitlist is the price of that, and we will not shorten it by hurrying.</p>
+      </details>
+      <details>
+        <summary>What am I actually paying for?</summary>
+        <p>The hide, the hours, and the hands. Nothing in the price pays for advertising, because there is none.</p>
+      </details>
+      <details>
+        <summary>Can I buy one outright, or must I commission it?</summary>
+        <p>Both. Each month's eight bags are sold as made, first come, first served. A commission takes longer and is yours alone. The price is the same unless your ideas are expensive.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="appointment">
+    <div class="appt-wrap">
+      <div>
+        <span class="mono-label reveal">N° 05 · Commissions</span>
+        <h2 class="display reveal">Or have one made for you alone.</h2>
+        <p class="lede reveal">The N°1 can be purchased as made, above. For something of your own, sized, dyed and finished to your life, the atelier receives visitors by appointment. Write to us and we will find an hour that suits you.</p>
+      </div>
+      <div class="reveal">
+        <form id="apptForm" novalidate>
+          <div><label for="f-name">Your name</label><input id="f-name" name="name" type="text" autocomplete="name" required></div>
+          <div><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+          <div><label for="f-msg">A few words</label><textarea id="f-msg" name="message"></textarea></div>
+          <button class="btn" type="submit">Request a private appointment</button>
+        </form>
+        <div class="form-success" id="formSuccess">Thank you. The atelier will write to you within two days.</div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <div class="logo">OUVRAGE</div>
+    <div class="fnote" style="margin-top:.8rem">Maison de maroquinerie · Paris</div>
+  </div>
+  <div class="fnote">
+    OUVRAGE is a fictional brand created as a design piece. All imagery on this page is AI generated. No bags exist, though perhaps they should.
+  </div>
+</footer>
+
+<script>
+(function(){
+  "use strict";
+  var prefersReduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isMobile = matchMedia("(max-width: 900px)").matches;
+
+  /* nav */
+  var nav = document.getElementById("topnav");
+  addEventListener("scroll", function(){ nav.classList.toggle("scrolled", scrollY > 40); }, {passive:true});
+
+  /* dust motes */
+  if(!prefersReduced){
+    var dust = document.getElementById("heroDust");
+    for(var i=0;i<14;i++){
+      var m=document.createElement("i");
+      m.style.left=(Math.random()*100)+"%";
+      m.style.top=(Math.random()*100)+"%";
+      m.style.animationDuration=(14+Math.random()*22)+"s";
+      m.style.animationDelay=(-Math.random()*20)+"s";
+      m.style.opacity=(0.15+Math.random()*0.4).toFixed(2);
+      dust.appendChild(m);
+    }
+  }
+
+  /* reveals */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add("in"); io.unobserve(e.target); } });
+  }, {threshold:.18});
+  document.querySelectorAll(".reveal").forEach(function(el){ io.observe(el); });
+
+  /* stitch spine draws with scroll */
+  var stitchSvg=document.getElementById("stitch"), stitchPath=document.getElementById("stitchPath"), mainEl=document.querySelector("main");
+  function sizeStitch(){
+    var h=mainEl.scrollHeight;
+    stitchSvg.setAttribute("viewBox","0 0 2 "+h);
+    stitchSvg.style.height=h+"px";
+    stitchPath.setAttribute("d","M1 0 V "+h);
+    var len=h; stitchPath.style.strokeDasharray="7 9";
+    stitchPath.dataset.len=len;
+  }
+  sizeStitch(); addEventListener("resize", sizeStitch);
+  if(!prefersReduced){
+    stitchPath.style.strokeDasharray="0 "+(mainEl.scrollHeight);
+    addEventListener("scroll", function(){
+      var r=mainEl.getBoundingClientRect();
+      var seen=Math.min(Math.max(-r.top+innerHeight*0.8,0), r.height);
+      stitchPath.style.strokeDasharray="7 9";
+      stitchPath.style.strokeDashoffset=0;
+      stitchPath.style.clipPath="inset(0 0 "+Math.max(0,(1-seen/r.height)*100)+"% 0)";
+    }, {passive:true});
+  }
+
+  /* bag spotlight */
+  var bagImg=document.getElementById("bagImg");
+  if(bagImg && !prefersReduced){
+    bagImg.addEventListener("pointermove", function(ev){
+      var r=bagImg.getBoundingClientRect();
+      bagImg.style.setProperty("--mx", ((ev.clientX-r.left)/r.width*100)+"%");
+      bagImg.style.setProperty("--my", ((ev.clientY-r.top)/r.height*100)+"%");
+    });
+  }
+
+  /* purchase flow: JS-only success state (demo house) */
+  var buyBtn=document.getElementById("buyBtn"), buyForm=document.getElementById("buyForm");
+  buyBtn.addEventListener("click", function(){
+    buyForm.classList.add("show");
+    buyBtn.disabled=true; buyBtn.style.opacity=.5;
+    document.getElementById("b-email").focus();
+  });
+  buyForm.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var em=document.getElementById("b-email");
+    if(!em.value.trim()||em.validity.typeMismatch){ em.focus(); return; }
+    document.getElementById("buyRow").style.display="none";
+    buyForm.style.display="none";
+    document.getElementById("buySuccess").classList.add("show");
+  });
+
+  /* form: JS-only success state (demo house) */
+  var form=document.getElementById("apptForm");
+  form.addEventListener("submit", function(ev){
+    ev.preventDefault();
+    var name=document.getElementById("f-name"), email=document.getElementById("f-email");
+    if(!name.value.trim()||!email.value.trim()||email.validity.typeMismatch){
+      (!name.value.trim()?name:email).focus(); return;
+    }
+    form.style.display="none";
+    document.getElementById("formSuccess").classList.add("show");
+  });
+
+  /* mobile: move bands into stacked story below still hero */
+  if(isMobile){
+    var story=document.getElementById("mobileStory");
+    document.querySelectorAll("#stage .band").forEach(function(b){
+      if(b.id!=="openBand") story.appendChild(b); /* wordmark stays over the hero image */
+    });
+    document.getElementById("scrollHint").classList.add("hide");
+    return; /* no video work on mobile */
+  }
+
+  /* ---------- scrub engine (desktop) ---------- */
+  var video=document.getElementById("heroVideo"), poster=document.getElementById("heroPoster");
+  var journey=document.getElementById("journey"), hint=document.getElementById("scrollHint");
+  var ring=document.getElementById("loadRing"), ringFill=ring.querySelector(".fill");
+  var bands=[].slice.call(document.querySelectorAll("#stage .band"));
+  var videoReady=false, duration=0;
+  var displayed=0, target=0, seeking=false, pendingSeek=null, lastSet=-1;
+
+  function progress(){
+    var r=journey.getBoundingClientRect();
+    var total=r.height-innerHeight;
+    return Math.min(Math.max(-r.top/total,0),1);
+  }
+
+  function updateBands(p){
+    bands.forEach(function(b){
+      var on=p>=parseFloat(b.dataset.from)&&p<parseFloat(b.dataset.to);
+      if(on!==b.classList.contains("on")) b.classList.toggle("on",on);
+    });
+    var hide=p>0.02;
+    if(hide!==hint.classList.contains("hide")) hint.classList.toggle("hide",hide);
+  }
+
+  function seekTo(t){
+    if(seeking){ pendingSeek=t; return; }
+    seeking=true;
+    video.currentTime=t;
+  }
+  function onSeeked(){
+    seeking=false;
+    if(pendingSeek!==null){ var t=pendingSeek; pendingSeek=null; seekTo(t); }
+  }
+
+  function loop(){
+    var p=progress();
+    updateBands(p);
+    if(videoReady&&duration>0){
+      target=p*duration;
+      var diff=target-displayed;
+      if(Math.abs(diff)>0.001){
+        displayed+=diff*0.18;
+        if(Math.abs(target-displayed)<0.002) displayed=target;
+        var q=Math.round(displayed*24)/24;
+        if(q!==lastSet){ lastSet=q; seekTo(q); }
+        requestAnimationFrame(loop);
+        return;
+      }
+    }
+    rafActive=false;
+  }
+  var rafActive=false;
+  function wake(){ if(!rafActive){ rafActive=true; requestAnimationFrame(loop); } }
+  addEventListener("scroll", wake, {passive:true});
+  addEventListener("resize", wake);
+
+  if(prefersReduced) return; /* still hero + fading captions only */
+
+  /* fetch video as blob with honest progress ring */
+  fetch("assets/hero.mp4").then(function(res){
+    if(!res.ok) throw new Error("no video");
+    var total=+res.headers.get("Content-Length")||0, got=0;
+    if(total>1500000) ring.classList.add("show");
+    var reader=res.body.getReader(), chunks=[];
+    function pump(){
+      return reader.read().then(function(x){
+        if(x.done) return;
+        chunks.push(x.value); got+=x.value.length;
+        if(total) ringFill.style.strokeDashoffset=126*(1-got/total);
+        return pump();
+      });
+    }
+    return pump().then(function(){ return new Blob(chunks,{type:"video/mp4"}); });
+  }).then(function(blob){
+    ring.classList.remove("show");
+    video.src=URL.createObjectURL(blob);
+    video.addEventListener("loadedmetadata", function(){
+      duration=video.duration;
+      video.addEventListener("seeked", onSeeked);
+      video.currentTime=0.001;
+      videoReady=true;
+      video.style.opacity=1; poster.style.opacity=0;
+      wake();
+    });
+    video.load();
+  }).catch(function(){
+    /* no video: designed still hero stands on its own */
+    ring.classList.remove("show");
+  });
+})();
+</script>
+</body>
+</html>

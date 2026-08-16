@@ -1,0 +1,6 @@
+.mcp.json
+.claude/
+review/
+*.zip
+.DS_Store
+node_modules/
