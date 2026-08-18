@@ -1,0 +1,784 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LUMIÈRE · Skin &amp; Aesthetic Clinic</title>
+<meta name="description" content="LUMIÈRE is a dermatologist-led skin and aesthetic clinic. Natural-looking results, transparent pricing, free first consultation.">
+<meta property="og:title" content="LUMIÈRE · Confidence, clinically delivered.">
+<meta property="og:description" content="Doctor-led skin treatments. Free first consultation. Natural results.">
+<meta property="og:image" content="assets/poster.jpg">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/poster.jpg" media="(min-width:901px)">
+<link rel="preload" as="image" href="assets/poster-mobile.jpg" media="(max-width:900px)">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+<noscript><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"></noscript>
+<style>
+:root{
+  --porcelain:#faf7f2;
+  --linen:#f0e9df;
+  --ink:#1f2422;
+  --ink-dim:rgba(31,36,34,.64);
+  --sage:#8fa393;
+  --gold:#b99a5f;
+  --serif:'Cormorant Garamond',serif;
+  --sans:'Jost',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--porcelain);color:var(--ink);font-family:var(--sans);font-weight:300;line-height:1.7;overflow-x:hidden}
+::selection{background:var(--gold);color:#fff}
+img,video{max-width:100%}
+button{font-family:inherit;cursor:pointer}
+a{color:inherit}
+
+/* ---------- hero ---------- */
+#journey{position:relative;height:520vh}
+#stage{position:sticky;top:0;height:100vh;overflow:hidden;background:var(--linen)}
+#heroVideo,#heroPoster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+#heroPoster{opacity:1;transition:opacity .8s ease}
+#heroVideo{opacity:0;transition:opacity .8s ease}
+.band{position:absolute;inset:0;display:flex;align-items:center;pointer-events:none;opacity:0;transform:translateY(26px);transition:opacity .65s ease,transform .65s ease}
+.band.on{opacity:1;transform:translateY(0)}
+.band-inner{max-width:620px;padding:0 7vw;position:relative}
+.band-inner::before{content:"";position:absolute;inset:-2.6rem -3.2rem;z-index:-1;border-radius:8px;
+  background:radial-gradient(ellipse at 40% 50%, rgba(250,247,242,.92), rgba(250,247,242,.6) 60%, transparent 82%)}
+.kicker{font-weight:500;font-size:.72rem;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;margin-bottom:1rem}
+.band h1{font-family:var(--serif);font-weight:500;font-size:clamp(2.8rem,5.2vw,4.6rem);line-height:1.06}
+.band h2{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,4vw,3.4rem);line-height:1.12}
+.band p{margin-top:1rem;color:var(--ink-dim);font-size:1.05rem;max-width:42ch}
+.wordmark{font-family:var(--serif);font-weight:600;font-size:clamp(3.4rem,7vw,6.4rem);letter-spacing:.12em;line-height:1}
+.cta-row{margin-top:2rem;pointer-events:auto;display:flex;gap:1rem;flex-wrap:wrap;align-items:center}
+.btn{display:inline-block;background:var(--gold);color:#fff;text-decoration:none;border:none;
+  font-weight:500;font-size:.8rem;letter-spacing:.28em;text-transform:uppercase;
+  padding:1.05rem 2.4rem;border-radius:2px;transition:transform .25s ease,box-shadow .25s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 26px rgba(185,154,95,.35)}
+.btn.ghost{background:transparent;color:var(--ink);border:1px solid rgba(31,36,34,.3)}
+.btn.ghost:hover{border-color:var(--gold);color:var(--gold);box-shadow:none}
+.trust-line{font-size:.82rem;color:var(--ink-dim);letter-spacing:.04em}
+.trust-line b{color:var(--sage);font-weight:500}
+
+#loadRing{position:absolute;right:2.2rem;bottom:2.2rem;width:44px;height:44px;opacity:0;transition:opacity .4s}
+#loadRing.show{opacity:1}
+#loadRing svg{width:100%;height:100%;transform:rotate(-90deg)}
+#loadRing .track{stroke:rgba(31,36,34,.12);fill:none;stroke-width:2}
+#loadRing .fill{stroke:var(--gold);fill:none;stroke-width:2;stroke-dasharray:126;stroke-dashoffset:126;transition:stroke-dashoffset .3s}
+.scroll-hint{position:absolute;left:50%;bottom:2rem;transform:translateX(-50%);font-size:.68rem;letter-spacing:.42em;color:var(--ink-dim);text-transform:uppercase;font-weight:400;transition:opacity .6s}
+.scroll-hint.hide{opacity:0}
+.scroll-hint::after{content:"";display:block;width:1px;height:34px;margin:.7rem auto 0;background:linear-gradient(var(--gold),transparent)}
+
+/* ---------- nav ---------- */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;justify-content:space-between;align-items:center;
+  padding:1.1rem 4vw 1.9rem;background:linear-gradient(to bottom, rgba(250,247,242,.92), rgba(250,247,242,0));transition:background .4s,box-shadow .4s,padding .4s}
+nav.scrolled{background:rgba(250,247,242,.95);backdrop-filter:blur(12px);box-shadow:0 1px 0 rgba(185,154,95,.25);padding-bottom:1.1rem}
+nav .logo{font-family:var(--serif);font-weight:600;font-size:1.45rem;letter-spacing:.22em;text-decoration:none}
+nav ul{display:flex;gap:1.9rem;list-style:none;align-items:center}
+nav ul a{text-decoration:none;font-size:.74rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;transition:color .3s}
+nav ul a:hover{color:var(--gold)}
+#consultBtn{position:relative;background:var(--ink);border:none;color:var(--porcelain);
+  font-size:.72rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;padding:.6rem 1.3rem;border-radius:2px;transition:background .3s}
+#consultBtn:hover{background:var(--gold)}
+#consultCount{display:inline-block;min-width:1.5em;padding:.05em .35em;margin-left:.5rem;background:var(--gold);color:#fff;border-radius:999px;font-size:.72rem;font-weight:500;text-align:center}
+
+main{position:relative;background:var(--porcelain)}
+section{position:relative;padding:6.5rem 6vw;z-index:1}
+.sec-kicker{text-align:center;font-size:.7rem;letter-spacing:.42em;color:var(--gold);text-transform:uppercase;font-weight:500;margin-bottom:.9rem}
+.sec-title{font-family:var(--serif);font-weight:500;font-size:clamp(2.2rem,4vw,3.4rem);text-align:center;margin-bottom:.6rem}
+.sec-sub{text-align:center;color:var(--ink-dim);max-width:56ch;margin:0 auto 3.2rem}
+.reveal{opacity:0;transform:translateY(30px);transition:opacity .9s cubic-bezier(.22,.61,.36,1),transform .9s cubic-bezier(.22,.61,.36,1)}
+.reveal.in{opacity:1;transform:none}
+#goldthread{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible;z-index:0}
+#goldthread path{stroke:var(--gold);stroke-width:1.5;fill:none;opacity:.4}
+main section{z-index:1}
+
+/* ---------- difference ---------- */
+.diff-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;max-width:1150px;margin:0 auto}
+.diff-card{background:#fff;border:1px solid rgba(185,154,95,.2);border-radius:4px;padding:2.6rem 2.2rem;text-align:center}
+.diff-card .num{font-family:var(--serif);font-size:1rem;color:var(--gold);letter-spacing:.3em;margin-bottom:1rem}
+.diff-card h3{font-family:var(--serif);font-weight:600;font-size:1.7rem;margin-bottom:.7rem}
+.diff-card p{color:var(--ink-dim);font-size:.96rem;max-width:32ch;margin:0 auto}
+
+/* ---------- treatments ---------- */
+#treatments{background:var(--linen);border-radius:4rem 4rem 0 0}
+.treat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;max-width:1250px;margin:0 auto}
+.treat-card{background:#fff;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;position:relative;
+  transition:transform .35s cubic-bezier(.22,.61,.36,1),box-shadow .35s;box-shadow:0 2px 12px rgba(31,36,34,.06)}
+.treat-card:hover{transform:translateY(-6px);box-shadow:0 16px 38px rgba(31,36,34,.12)}
+.treat-media{position:relative;aspect-ratio:1;overflow:hidden;background:var(--linen)}
+.treat-media video,.treat-media img{width:100%;height:100%;object-fit:cover;display:block}
+.sweep{position:absolute;inset:0;pointer-events:none;background:linear-gradient(105deg, transparent 40%, rgba(255,255,255,.55) 50%, transparent 60%);
+  transform:translateX(-120%);transition:transform .9s ease}
+.treat-card:hover .sweep{transform:translateX(120%)}
+.treat-body{padding:1.4rem 1.5rem 1.6rem;display:flex;flex-direction:column;gap:.4rem;flex:1}
+.treat-body h3{font-family:var(--serif);font-weight:600;font-size:1.5rem}
+.treat-out{color:var(--ink-dim);font-size:.92rem}
+.treat-foot{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem}
+.treat-price{font-family:var(--sans);font-weight:500;font-variant-numeric:tabular-nums;font-size:1.02rem}
+.treat-price small{color:var(--ink-dim);font-weight:300}
+.add-btn{background:transparent;border:1px solid var(--gold);color:var(--gold);border-radius:2px;
+  font-size:.7rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;padding:.65rem 1.1rem;transition:all .25s}
+.add-btn:hover{background:var(--gold);color:#fff}
+.add-btn.added{background:var(--sage);border-color:var(--sage);color:#fff}
+
+/* ---------- results ---------- */
+.ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.8rem;max-width:1250px;margin:0 auto 3.4rem}
+.ba-card{background:#fff;border-radius:6px;overflow:hidden;box-shadow:0 2px 12px rgba(31,36,34,.06)}
+.ba-wrap{position:relative;aspect-ratio:1;overflow:hidden;cursor:ew-resize;touch-action:none;user-select:none}
+.ba-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-after{clip-path:inset(0 0 0 50%)}
+.ba-divider{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 8px rgba(0,0,0,.25);pointer-events:none}
+.ba-divider::after{content:"⟷";position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:38px;height:38px;border-radius:50%;background:#fff;color:var(--ink);display:flex;align-items:center;justify-content:center;font-size:1rem;box-shadow:0 2px 10px rgba(0,0,0,.2)}
+.ba-tags{position:absolute;top:.8rem;left:.8rem;right:.8rem;display:flex;justify-content:space-between;pointer-events:none}
+.ba-tag{background:rgba(31,36,34,.55);color:#fff;font-size:.64rem;letter-spacing:.22em;text-transform:uppercase;padding:.25rem .7rem;border-radius:2px}
+.ba-body{padding:1.1rem 1.3rem}
+.ba-body h3{font-family:var(--serif);font-weight:600;font-size:1.3rem}
+.ba-note{font-size:.72rem;color:var(--ink-dim);letter-spacing:.06em;margin-top:.2rem}
+.stat-row{display:flex;justify-content:center;gap:4rem;flex-wrap:wrap;border-top:1px solid rgba(185,154,95,.3);padding-top:2.8rem;max-width:900px;margin:0 auto}
+.stat{text-align:center}
+.stat .n{font-family:var(--serif);font-weight:600;font-size:2.8rem;font-variant-numeric:tabular-nums;color:var(--ink)}
+.stat .n span{color:var(--gold)}
+.stat .l{font-size:.74rem;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* ---------- doctor ---------- */
+#doctor{background:var(--linen)}
+.doc-wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:4rem;align-items:center;max-width:1150px;margin:0 auto}
+.doc-wrap img{width:100%;border-radius:6px;display:block}
+.doc-copy h2{font-family:var(--serif);font-weight:500;font-size:clamp(2rem,3.4vw,3rem);line-height:1.15;margin-bottom:.6rem}
+.doc-cred{font-size:.8rem;letter-spacing:.22em;text-transform:uppercase;color:var(--sage);font-weight:500;margin-bottom:1.4rem}
+.doc-quote{font-family:var(--serif);font-size:1.5rem;font-style:italic;color:var(--ink);border-left:2px solid var(--gold);padding-left:1.4rem;margin:1.4rem 0}
+.doc-copy p{color:var(--ink-dim);max-width:50ch}
+.illus-note{font-size:.7rem;color:var(--ink-dim);letter-spacing:.08em;margin-top:.8rem}
+
+/* ---------- reviews ---------- */
+.rev-row{display:flex;gap:1.4rem;overflow-x:auto;padding:0 6vw 1.5rem;scroll-snap-type:x mandatory;cursor:grab;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.rev-row::-webkit-scrollbar{display:none}
+.rev-row.dragging{cursor:grabbing;scroll-snap-type:none}
+.rev-card{flex:0 0 320px;scroll-snap-align:start;background:#fff;border-radius:6px;padding:1.8rem;box-shadow:0 2px 12px rgba(31,36,34,.06)}
+.rev-stars{color:var(--gold);letter-spacing:.2em;margin-bottom:.7rem}
+.rev-card p{font-size:.95rem;color:var(--ink);margin-bottom:1rem}
+.rev-who{font-size:.78rem;letter-spacing:.1em;color:var(--ink-dim)}
+
+/* ---------- booking ---------- */
+#booking{background:var(--porcelain)}
+.book-wrap{max-width:820px;margin:0 auto;background:#fff;border:1px solid rgba(185,154,95,.25);border-radius:8px;padding:2.6rem;box-shadow:0 8px 40px rgba(31,36,34,.07)}
+.book-step{margin-bottom:2.2rem}
+.step-label{font-size:.7rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);font-weight:500;margin-bottom:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:.6rem}
+.chip{background:var(--linen);border:1px solid transparent;border-radius:999px;padding:.5rem 1.2rem;font-size:.85rem;display:flex;align-items:center;gap:.5rem}
+.chip button{background:none;border:none;color:var(--ink-dim);font-size:1rem;line-height:1}
+.chip.empty{color:var(--ink-dim);font-style:italic}
+.date-strip{display:flex;gap:.6rem;overflow-x:auto;padding-bottom:.6rem;scrollbar-width:thin}
+.date-cell{flex:0 0 auto;min-width:68px;text-align:center;border:1px solid rgba(31,36,34,.15);border-radius:6px;padding:.6rem .5rem;background:#fff;transition:all .25s}
+.date-cell .dow{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim)}
+.date-cell .dnum{font-family:var(--serif);font-weight:600;font-size:1.3rem;font-variant-numeric:tabular-nums}
+.date-cell .mon{font-size:.62rem;color:var(--ink-dim);text-transform:uppercase}
+.date-cell:hover{border-color:var(--gold)}
+.date-cell.sel{background:var(--ink);border-color:var(--ink)}
+.date-cell.sel .dow,.date-cell.sel .dnum,.date-cell.sel .mon{color:var(--porcelain)}
+.slot-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:.6rem;margin-top:1.1rem}
+.slot{border:1px solid rgba(31,36,34,.15);border-radius:4px;background:#fff;padding:.55rem .3rem;font-size:.85rem;font-variant-numeric:tabular-nums;transition:all .2s}
+.slot:hover:not(:disabled){border-color:var(--gold);color:var(--gold)}
+.slot.sel{background:var(--gold);border-color:var(--gold);color:#fff}
+.slot:disabled{background:var(--linen);color:rgba(31,36,34,.3);cursor:not-allowed;text-decoration:line-through}
+.book-form{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem}
+.book-form label{font-size:.68rem;font-weight:500;letter-spacing:.26em;text-transform:uppercase;color:var(--ink-dim);display:block;margin-bottom:.35rem}
+.book-form input{width:100%;background:var(--porcelain);border:1px solid rgba(31,36,34,.15);border-radius:4px;padding:.85rem 1rem;font-family:var(--sans);font-weight:400;font-size:1rem;color:var(--ink);transition:border-color .3s,box-shadow .3s}
+.book-form input:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px rgba(185,154,95,.15)}
+.field.shake{animation:shake .4s}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+.book-actions{display:flex;align-items:center;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-top:1.8rem}
+#confirmBtn{font-size:.8rem;padding:1.1rem 2.6rem}
+#bookSuccess{display:none;text-align:center;padding:2rem 1rem}
+#bookSuccess.show{display:block}
+#bookSuccess h3{font-family:var(--serif);font-weight:600;font-size:2rem;margin-bottom:.6rem}
+#bookSuccess p{color:var(--ink-dim);max-width:44ch;margin:0 auto}
+
+/* ---------- faq ---------- */
+.faq{max-width:720px;margin:0 auto}
+.faq details{border-bottom:1px solid rgba(31,36,34,.12);padding:1.3rem .2rem}
+.faq summary{font-family:var(--serif);font-weight:600;font-size:1.3rem;cursor:pointer;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";color:var(--gold);font-size:1.4rem;font-family:var(--sans);transition:transform .3s;flex-shrink:0}
+.faq details[open] summary::after{transform:rotate(45deg)}
+.faq details p{color:var(--ink-dim);margin-top:.7rem;max-width:60ch;font-size:.97rem}
+
+footer{padding:3.5rem 6vw;background:var(--ink);color:var(--porcelain);display:flex;flex-wrap:wrap;gap:2.5rem;justify-content:space-between;align-items:flex-start}
+footer .logo{font-family:var(--serif);font-weight:600;font-size:1.5rem;letter-spacing:.22em}
+footer .fcol{font-size:.85rem;line-height:2;opacity:.8}
+footer .fcol b{font-weight:500;letter-spacing:.14em;text-transform:uppercase;font-size:.72rem;opacity:.7;display:block;margin-bottom:.3rem}
+footer .fnote{font-size:.8rem;opacity:.65;max-width:44ch;line-height:1.9}
+.map-ph{width:200px;height:110px;border:1px dashed rgba(250,247,242,.35);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;opacity:.6}
+
+#toast{position:fixed;left:50%;bottom:2rem;transform:translate(-50%,150%);background:var(--ink);color:var(--porcelain);
+  font-weight:400;font-size:.85rem;letter-spacing:.1em;padding:.9rem 1.8rem;border-radius:999px;transition:transform .4s cubic-bezier(.34,1.56,.64,1);z-index:100}
+#toast.show{transform:translate(-50%,0)}
+
+@media (prefers-reduced-motion: reduce){
+  .reveal,.band{transition:none;opacity:1;transform:none}
+  #goldthread{display:none}
+  .sweep{display:none}
+}
+@media (max-width:900px){
+  #journey{height:auto}
+  #stage{position:relative;height:76vh}
+  #heroVideo{display:none}
+  #heroPoster{object-position:center}
+  .band{position:relative;inset:auto;opacity:1;transform:none;padding:0}
+  .band-inner::before{display:none}
+  #openBand{position:absolute;left:0;right:0;top:auto;bottom:0;display:block;
+    background:linear-gradient(to top, rgba(250,247,242,.97) 24%, rgba(250,247,242,.6) 68%, rgba(250,247,242,0))}
+  #openBand .band-inner{padding:3rem 6vw 1.6rem;max-width:none}
+  #mobileStory{background:var(--porcelain);padding:2.4rem 6vw .5rem;display:grid;gap:2.2rem}
+  #mobileStory .band-inner{padding:0;max-width:none}
+  #mobileStory #settleBand{border-top:1px solid rgba(185,154,95,.35);padding-top:2.2rem}
+  #settleBand .cta-row{display:grid;gap:.9rem}
+  #settleBand .btn{text-align:center}
+  .diff-grid,.treat-grid,.ba-grid{grid-template-columns:1fr}
+  .doc-wrap{grid-template-columns:1fr;gap:2.2rem}
+  .book-wrap{padding:1.6rem}
+  .book-form{grid-template-columns:1fr}
+  .stat-row{gap:2rem}
+  nav{padding:1rem 5vw 1.5rem}
+  nav ul{gap:1rem}
+  nav ul li.hide-m{display:none}
+  nav ul a{font-size:.66rem}
+  section{padding:4.8rem 6vw}
+  footer{flex-direction:column}
+}
+@media (min-width:901px){
+  #mobileStory .band{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav id="topnav" aria-label="Main">
+  <a class="logo" href="#top">LUMIÈRE</a>
+  <ul>
+    <li class="hide-m"><a href="#treatments">Treatments</a></li>
+    <li class="hide-m"><a href="#results">Results</a></li>
+    <li><a href="tel:+910000000000">Call now</a></li>
+    <li><button id="consultBtn" aria-label="Open booking">Book<span id="consultCount">0</span></button></li>
+  </ul>
+</nav>
+
+<div id="journey" role="img" aria-label="A slow walk down a sunlit clinic corridor toward an open treatment room door.">
+  <div id="stage">
+    <picture>
+      <source media="(max-width:900px)" srcset="assets/poster-mobile.jpg">
+      <img id="heroPoster" src="assets/poster.jpg" fetchpriority="high" alt="A sunlit clinic corridor with a treatment room door opening onto soft light.">
+    </picture>
+    <video id="heroVideo" muted playsinline preload="none" aria-hidden="true"></video>
+
+    <div class="band" data-from="0" data-to="0.10" id="openBand">
+      <div class="band-inner">
+        <div class="kicker">Skin &amp; Aesthetic Clinic</div>
+        <div class="wordmark">LUMIÈRE</div>
+        <p>A clinic that feels like a spa and speaks like a doctor.</p>
+      </div>
+    </div>
+    <div class="band" data-from="0.16" data-to="0.30">
+      <div class="band-inner"><h2>Confidence,<br>clinically delivered.</h2></div>
+    </div>
+    <div class="band" data-from="0.38" data-to="0.52">
+      <div class="band-inner"><h2>Doctor-led.<br>Results you can see.</h2></div>
+    </div>
+    <div class="band" data-from="0.60" data-to="0.74">
+      <div class="band-inner"><h2>Free first consultation.</h2><p>No pressure. No packages pushed. Just answers.</p></div>
+    </div>
+    <div class="band" data-from="0.84" data-to="1.01" id="settleBand">
+      <div class="band-inner">
+        <div class="kicker">Begin with a conversation</div>
+        <h1>Your skin,<br>heard first.</h1>
+        <div class="cta-row">
+          <a class="btn magnetic" href="#booking">Book your consultation</a>
+          <a class="btn ghost" href="tel:+910000000000">Call now</a>
+        </div>
+        <p class="trust-line" style="margin-top:1.2rem"><b>Free first consultation</b> · Dermatologist-led · No-pressure plans</p>
+      </div>
+    </div>
+
+    <div class="scroll-hint" id="scrollHint">Scroll</div>
+    <div id="loadRing"><svg viewBox="0 0 44 44"><circle class="track" cx="22" cy="22" r="20"/><circle class="fill" cx="22" cy="22" r="20"/></svg></div>
+  </div>
+</div>
+
+<div id="mobileStory"></div>
+
+<main>
+  <section id="difference">
+    <div class="sec-kicker reveal">The difference</div>
+    <h2 class="sec-title reveal">Why women and men trust LUMIÈRE</h2>
+    <p class="sec-sub reveal">You've tried every cream. What changes results is a doctor who looks at your skin before selling you anything.</p>
+    <div class="diff-grid">
+      <div class="diff-card reveal">
+        <div class="num">I</div>
+        <h3>Dermatologist-led</h3>
+        <p>Every plan starts and ends with a doctor. Not a salon menu, a medical opinion.</p>
+      </div>
+      <div class="diff-card reveal">
+        <div class="num">II</div>
+        <h3>Transparent pricing</h3>
+        <p>Every price on this page is the real price. No surprise packages in the consultation room.</p>
+      </div>
+      <div class="diff-card reveal">
+        <div class="num">III</div>
+        <h3>Natural results</h3>
+        <p>If it won't look natural, we don't do it. People should notice you, not the work.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="treatments">
+    <div class="sec-kicker reveal">Treatments</div>
+    <h2 class="sec-title reveal">Six ways in. One honest plan.</h2>
+    <p class="sec-sub reveal">Add what interests you to your consultation. The doctor confirms what your skin actually needs, and tells you if it needs nothing.</p>
+    <div class="treat-grid" id="treatGrid"></div>
+  </section>
+
+  <section id="results">
+    <div class="sec-kicker reveal">Results</div>
+    <h2 class="sec-title reveal">Drag the line. See the change.</h2>
+    <p class="sec-sub reveal">Simulated results for illustration. In your consultation you'll see real case photos for your exact concern.</p>
+    <div class="ba-grid" id="baGrid"></div>
+    <div class="stat-row reveal">
+      <div class="stat"><div class="n"><span data-count="10000">0</span>+</div><div class="l">Sessions delivered</div></div>
+      <div class="stat"><div class="n"><span data-count="49">0</span></div><div class="l">Average rating</div></div>
+      <div class="stat"><div class="n"><span data-count="12">0</span> yrs</div><div class="l">Clinical experience</div></div>
+    </div>
+  </section>
+
+  <section id="doctor">
+    <div class="doc-wrap">
+      <div class="reveal"><img src="assets/doctor.jpg" alt="Portrait of Dr. Meera Kapoor in a white coat."></div>
+      <div class="doc-copy">
+        <div class="sec-kicker reveal" style="text-align:left">Your doctor</div>
+        <h2 class="reveal">Dr. Meera Kapoor</h2>
+        <div class="doc-cred reveal">MBBS, MD Dermatology · 12 years</div>
+        <div class="doc-quote reveal">"My rule is simple. If it won't look natural, we don't do it."</div>
+        <p class="reveal">Dr. Kapoor has spent twelve years treating Indian skin, which behaves differently under lasers and peels than the textbooks written elsewhere assume. Every protocol at LUMIÈRE is chosen for it.</p>
+        <p class="illus-note reveal">Illustrative portrait. LUMIÈRE is a fictional clinic.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="reviews" style="padding-left:0;padding-right:0">
+    <div class="sec-kicker reveal">Reviews</div>
+    <h2 class="sec-title reveal">4.9★ from people like you</h2>
+    <p class="sec-sub reveal">Drag to read.</p>
+    <div class="rev-row" id="revRow"></div>
+  </section>
+
+  <section id="booking">
+    <div class="sec-kicker reveal">Book</div>
+    <h2 class="sec-title reveal">Begin with a conversation.</h2>
+    <p class="sec-sub reveal"><b style="color:var(--sage);font-weight:500">Free first consultation</b> · Dermatologist-led · No-pressure plans</p>
+    <div class="book-wrap reveal" id="bookWrap">
+      <div id="bookFlow">
+        <div class="book-step">
+          <div class="step-label">1 · Your consultation</div>
+          <div class="chips" id="chipRow"></div>
+        </div>
+        <div class="book-step">
+          <div class="step-label">2 · Pick a day &amp; time</div>
+          <div class="date-strip" id="dateStrip"></div>
+          <div class="slot-grid" id="slotGrid"></div>
+        </div>
+        <div class="book-step" style="margin-bottom:0">
+          <div class="step-label">3 · Your details</div>
+          <div class="book-form">
+            <div class="field"><label for="b-name">Your name</label><input id="b-name" autocomplete="name"></div>
+            <div class="field"><label for="b-phone">Phone (10 digits)</label><input id="b-phone" type="tel" inputmode="numeric" maxlength="10" autocomplete="tel"></div>
+          </div>
+        </div>
+        <div class="book-actions">
+          <button class="btn magnetic" id="confirmBtn" type="button">Confirm on WhatsApp</button>
+          <span class="trust-line">We reply within the hour, 7 days a week.</span>
+        </div>
+      </div>
+      <div id="bookSuccess">
+        <h3>Request received.</h3>
+        <p id="successText">Your consultation request is on its way. We'll confirm your slot on WhatsApp within the hour.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="answers">
+    <div class="sec-kicker reveal">Questions</div>
+    <h2 class="sec-title reveal">Asked before every first visit</h2>
+    <p class="sec-sub reveal">The honest answers, before you even sit down.</p>
+    <div class="faq reveal">
+      <details>
+        <summary>Will it hurt?</summary>
+        <p>Most treatments feel like warmth or light snapping, and numbing cream handles the rest. You'll know exactly what a session feels like before you commit to anything, because we'll tell you plainly.</p>
+      </details>
+      <details>
+        <summary>How many sessions will I need?</summary>
+        <p>It depends on your skin, and anyone who promises a number before seeing you is guessing. After your free consultation you'll get a written plan with the expected range and the honest cost of the whole course.</p>
+      </details>
+      <details>
+        <summary>Is it safe for Indian skin?</summary>
+        <p>Yes, when the right technology is used at the right settings. Indian skin is more prone to post-treatment pigmentation, so we use protocols and lasers chosen specifically for deeper skin tones. This is Dr. Kapoor's specialty.</p>
+      </details>
+      <details>
+        <summary>Will I be pushed to buy a package?</summary>
+        <p>No. The consultation is free, the plan is written, the prices are on this page, and the decision is yours to take home. If your skin needs nothing, we will tell you that too.</p>
+      </details>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div>
+    <div class="logo">LUMIÈRE</div>
+    <div class="fcol" style="margin-top:.6rem">Skin &amp; Aesthetic Clinic</div>
+  </div>
+  <div class="fcol">
+    <b>Hours</b>
+    Mon–Sat · 11:00–20:00<br>
+    Sunday · Closed<br>
+    <a href="tel:+910000000000" style="text-decoration:none">+91 00000 00000</a>
+  </div>
+  <div class="map-ph">Map placeholder</div>
+  <div class="fnote">
+    LUMIÈRE is a fictional clinic created as a design piece. All imagery on this page is AI generated, including portraits and simulated results. No medical claims are made.
+  </div>
+</footer>
+
+<div id="toast"></div>
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"MedicalClinic","name":"LUMIÈRE Skin & Aesthetic Clinic","description":"Dermatologist-led skin and aesthetic clinic. Fictional demonstration website.","address":{"@type":"PostalAddress","streetAddress":"14 Palm Grove Road","addressLocality":"Mumbai","addressRegion":"MH","postalCode":"400050","addressCountry":"IN"},"telephone":"+910000000000","openingHours":"Mo-Sa 11:00-20:00","priceRange":"₹₹"}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Will it hurt?","acceptedAnswer":{"@type":"Answer","text":"Most treatments feel like warmth or light snapping, and numbing cream handles the rest. You'll know exactly what a session feels like before you commit."}},
+{"@type":"Question","name":"How many sessions will I need?","acceptedAnswer":{"@type":"Answer","text":"It depends on your skin. After your free consultation you'll get a written plan with the expected range and the honest cost of the whole course."}},
+{"@type":"Question","name":"Is it safe for Indian skin?","acceptedAnswer":{"@type":"Answer","text":"Yes, when the right technology is used at the right settings. We use protocols and lasers chosen specifically for deeper skin tones."}},
+{"@type":"Question","name":"Will I be pushed to buy a package?","acceptedAnswer":{"@type":"Answer","text":"No. The consultation is free, the plan is written, prices are public, and the decision is yours to take home."}}]}
+</script>
+
+<script>
+(function(){
+  "use strict";
+  var WHATSAPP="910000000000"; /* placeholder */
+  var prefersReduced=matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var isMobile=matchMedia("(max-width: 900px)").matches;
+
+  var TREATMENTS=[
+    {id:"clear",name:"Clear",out:"Acne & scar revision. Smoother texture, fewer marks.",price:"from ₹2,500",unit:"per session",img:"assets/t-clear.jpg",vid:"assets/v-clear.mp4"},
+    {id:"even",name:"Even",out:"Pigmentation & tone. Indian-skin-safe lasers.",price:"from ₹3,500",unit:"per session",img:"assets/t-even.jpg",vid:"assets/v-even.mp4"},
+    {id:"glass",name:"Glass",out:"HydraFacial ritual. The glass-skin glow.",price:"from ₹4,000",unit:"per session",img:"assets/t-glass.jpg",vid:"assets/v-glass.mp4"},
+    {id:"lift",name:"Lift",out:"Non-surgical contouring. Firmer lines, no surgery.",price:"from ₹8,000",unit:"per session",img:"assets/t-lift.jpg",vid:"assets/v-lift.mp4"},
+    {id:"renew",name:"Renew",out:"Anti-aging, doctor-administered. Softer lines.",price:"₹9,500",unit:"onwards",img:"assets/t-renew.jpg",vid:"assets/v-renew.mp4"},
+    {id:"restore",name:"Restore",out:"Hair regrowth. Denser growth in 3 months.",price:"from ₹6,000",unit:"per session",img:"assets/t-restore.jpg",vid:"assets/v-restore.mp4"}
+  ];
+  var BA=[
+    {id:"acne",name:"Acne & scars",before:"assets/ba-acne-before.jpg",after:"assets/ba-acne-after.jpg"},
+    {id:"pigment",name:"Pigmentation",before:"assets/ba-pigment-before.jpg",after:"assets/ba-pigment-after.jpg"},
+    {id:"eye",name:"Under-eye",before:"assets/ba-eye-before.jpg",after:"assets/ba-eye-after.jpg"}
+  ];
+  var REVIEWS=[
+    {t:"I walked in expecting a sales pitch and walked out with a plan and homework. Three months later my scars are visibly lighter.",w:"Ananya S. · Clear"},
+    {t:"First clinic that explained why my pigmentation kept coming back. The laser they used was chosen for my skin tone, and it shows.",w:"Ritika M. · Even"},
+    {t:"The glass facial is my monthly reset. My skin looks like I sleep eight hours. I do not.",w:"Sneha K. · Glass"},
+    {t:"I was terrified of looking 'done'. Dr. Kapoor refused two things I asked for, and she was right about both.",w:"Farah A. · Renew"},
+    {t:"Booked for my husband's hair. He went from sceptic to evangelist in four sessions.",w:"Priya & Arjun · Restore"}
+  ];
+
+  var nav=document.getElementById("topnav");
+  addEventListener("scroll",function(){nav.classList.toggle("scrolled",scrollY>40);},{passive:true});
+
+  var qaMode=location.search.indexOf("qa=1")>-1; /* QA capture: skip reveal animations */
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add("in");io.unobserve(e.target);}});},{threshold:.15});
+  document.querySelectorAll(".reveal").forEach(function(el){if(qaMode){el.style.transition="none";el.classList.add("in");}else io.observe(el);});
+  /* anchor landings: IO recomputes lazily after fragment scroll, so sweep visible reveals ourselves */
+  function revealCatchUp(){document.querySelectorAll(".reveal:not(.in)").forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.top<innerHeight*0.92&&r.bottom>0){el.classList.add("in");io.unobserve(el);}});}
+  addEventListener("load",function(){setTimeout(revealCatchUp,150)});
+  addEventListener("hashchange",function(){setTimeout(revealCatchUp,150)});
+
+  function toast(msg){var t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(t._h);t._h=setTimeout(function(){t.classList.remove("show")},1900);}
+
+  /* ---------- treatments ---------- */
+  var vidObserver=new IntersectionObserver(function(es){
+    es.forEach(function(e){var v=e.target;
+      if(e.isIntersecting){ if(v.dataset.srcset!=="1"){v.src=v.dataset.src;v.dataset.srcset="1";} v.play().catch(function(){}); }
+      else v.pause();
+    });
+  },{threshold:.25});
+
+  var tGrid=document.getElementById("treatGrid");
+  TREATMENTS.forEach(function(t){
+    var el=document.createElement("div");el.className="treat-card reveal";
+    el.innerHTML='<div class="treat-media">'+
+      (prefersReduced
+        ? '<img src="'+t.img+'" alt="'+t.name+' treatment still life">'
+        : '<video muted playsinline loop preload="none" data-src="'+t.vid+'" poster="'+t.img+'" aria-label="'+t.name+' treatment"></video>')+
+      '<div class="sweep"></div></div>'+
+      '<div class="treat-body"><h3>'+t.name+'</h3><div class="treat-out">'+t.out+'</div>'+
+      '<div class="treat-foot"><span class="treat-price">'+t.price+' <small>'+t.unit+'</small></span>'+
+      '<button class="add-btn" data-add="'+t.id+'">Add to consultation</button></div></div>';
+    tGrid.appendChild(el);io.observe(el);
+    var v=el.querySelector("video");if(v)vidObserver.observe(v);
+  });
+
+  /* ---------- before/after sliders ---------- */
+  var baGrid=document.getElementById("baGrid");
+  BA.forEach(function(b){
+    var el=document.createElement("div");el.className="ba-card reveal";
+    el.innerHTML='<div class="ba-wrap">'+
+      '<img src="'+b.before+'" alt="Before, '+b.name+' (simulated)">'+
+      '<img class="ba-after" src="'+b.after+'" alt="After, '+b.name+' (simulated)">'+
+      '<div class="ba-divider"></div>'+
+      '<div class="ba-tags"><span class="ba-tag">Before</span><span class="ba-tag">After</span></div></div>'+
+      '<div class="ba-body"><h3>'+b.name+'</h3><div class="ba-note">Simulated result — illustrative</div></div>';
+    baGrid.appendChild(el);io.observe(el);
+    var wrap=el.querySelector(".ba-wrap"),after=el.querySelector(".ba-after"),div=el.querySelector(".ba-divider");
+    function setPos(clientX){
+      var r=wrap.getBoundingClientRect();
+      var p=Math.min(Math.max((clientX-r.left)/r.width,0),1)*100;
+      after.style.clipPath="inset(0 0 0 "+p+"%)";div.style.left=p+"%";
+    }
+    wrap.addEventListener("pointerdown",function(e){try{wrap.setPointerCapture(e.pointerId)}catch(err){}setPos(e.clientX);
+      function mv(ev){setPos(ev.clientX)}
+      function up(){wrap.removeEventListener("pointermove",mv);wrap.removeEventListener("pointerup",up)}
+      wrap.addEventListener("pointermove",mv);wrap.addEventListener("pointerup",up);});
+  });
+
+  /* ---------- stat counters ---------- */
+  var statIO=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(!e.isIntersecting)return;statIO.unobserve(e.target);
+      var el=e.target,target=+el.dataset.count,isRating=target===49;
+      if(prefersReduced){el.textContent=isRating?"4.9":target.toLocaleString("en-IN");return;}
+      var t0=null;
+      function step(ts){if(!t0)t0=ts;var k=Math.min((ts-t0)/1400,1);k=1-Math.pow(1-k,3);
+        var val=target*k;
+        el.textContent=isRating?(val/10).toFixed(1):Math.round(val).toLocaleString("en-IN");
+        if(k<1)requestAnimationFrame(step);}
+      requestAnimationFrame(step);
+    });
+  },{threshold:.6});
+  document.querySelectorAll("[data-count]").forEach(function(el){statIO.observe(el);});
+
+  /* ---------- reviews ---------- */
+  var row=document.getElementById("revRow");
+  REVIEWS.forEach(function(r){
+    var el=document.createElement("div");el.className="rev-card";
+    el.innerHTML='<div class="rev-stars">★★★★★</div><p>'+r.t+'</p><div class="rev-who">'+r.w+'</div>';
+    row.appendChild(el);
+  });
+  (function(){var down=false,sx=0,sl=0;
+    row.addEventListener("pointerdown",function(e){down=true;sx=e.clientX;sl=row.scrollLeft;row.classList.add("dragging");});
+    addEventListener("pointermove",function(e){if(down)row.scrollLeft=sl-(e.clientX-sx);});
+    addEventListener("pointerup",function(){down=false;row.classList.remove("dragging");});
+  })();
+
+  /* ---------- booking engine ---------- */
+  var picks={};
+  try{picks=JSON.parse(localStorage.getItem("lumiere-consult")||"{}")}catch(e){picks={}}
+  function savePicks(){localStorage.setItem("lumiere-consult",JSON.stringify(picks));}
+  var badge=document.getElementById("consultCount"),chipRow=document.getElementById("chipRow");
+
+  function renderChips(){
+    var ids=Object.keys(picks);
+    badge.textContent=ids.length;
+    chipRow.innerHTML="";
+    if(!ids.length){chipRow.innerHTML='<span class="chip empty">General consultation</span>';return;}
+    ids.forEach(function(id){
+      var t=TREATMENTS.find(function(x){return x.id===id});
+      var c=document.createElement("span");c.className="chip";
+      c.innerHTML=t.name+' <button aria-label="Remove '+t.name+'" data-unpick="'+id+'">×</button>';
+      chipRow.appendChild(c);
+    });
+  }
+  renderChips();
+
+  document.addEventListener("click",function(e){
+    var t=e.target;
+    if(t.dataset.add){
+      picks[t.dataset.add]=1;savePicks();renderChips();
+      t.textContent="Added ✓";t.classList.add("added");
+      setTimeout(function(){t.textContent="Add to consultation";t.classList.remove("added")},1300);
+      toast("Added to your consultation");
+    }
+    if(t.dataset.unpick){delete picks[t.dataset.unpick];savePicks();renderChips();}
+  });
+  document.getElementById("consultBtn").addEventListener("click",function(){
+    document.getElementById("booking").scrollIntoView({behavior:prefersReduced?"auto":"smooth"});
+  });
+
+  /* date strip: 14 days from today, skip Sundays */
+  var selDate=null,selSlot=null;
+  var dateStrip=document.getElementById("dateStrip"),slotGrid=document.getElementById("slotGrid");
+  var DOW=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],MON=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var days=[],d=new Date();
+  while(days.length<14){
+    if(d.getDay()!==0)days.push(new Date(d));
+    d.setDate(d.getDate()+1);
+  }
+  days.forEach(function(day,i){
+    var cell=document.createElement("button");cell.className="date-cell";cell.type="button";
+    cell.innerHTML='<div class="dow">'+DOW[day.getDay()]+'</div><div class="dnum">'+day.getDate()+'</div><div class="mon">'+MON[day.getMonth()]+'</div>';
+    cell.addEventListener("click",function(){
+      selDate=day;selSlot=null;
+      dateStrip.querySelectorAll(".date-cell").forEach(function(c){c.classList.remove("sel")});
+      cell.classList.add("sel");renderSlots();
+    });
+    dateStrip.appendChild(cell);
+    if(i===0){cell.click();}
+  });
+
+  /* deterministic seeded "booked" slots per date */
+  function seedRand(str){var h=2166136261;for(var i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619);}
+    return function(){h=Math.imul(h^(h>>>15),2246822507);h=Math.imul(h^(h>>>13),3266489909);return ((h^=h>>>16)>>>0)/4294967296;};}
+  function renderSlots(){
+    slotGrid.innerHTML="";
+    var key=selDate.toISOString().slice(0,10),rnd=seedRand(key);
+    for(var h=11;h<20;h++){
+      [0,30].forEach(function(m){
+        if(h===19&&m>30)return;
+        var label=(h<10?"0":"")+h+":"+(m===0?"00":"30");
+        var b=document.createElement("button");b.className="slot";b.type="button";b.textContent=label;
+        if(rnd()<0.3){b.disabled=true;}
+        else b.addEventListener("click",function(){
+          selSlot=label;
+          slotGrid.querySelectorAll(".slot").forEach(function(s){s.classList.remove("sel")});
+          b.classList.add("sel");
+        });
+        slotGrid.appendChild(b);
+      });
+    }
+  }
+
+  /* confirm */
+  function shake(el){el.classList.add("shake");setTimeout(function(){el.classList.remove("shake")},450);}
+  document.getElementById("confirmBtn").addEventListener("click",function(){
+    var name=document.getElementById("b-name"),phone=document.getElementById("b-phone");
+    if(!selSlot){toast("Pick a time slot first");slotGrid.scrollIntoView({behavior:"smooth",block:"center"});return;}
+    if(!name.value.trim()){shake(name.parentElement);name.focus();return;}
+    if(!/^\d{10}$/.test(phone.value.trim())){shake(phone.parentElement);phone.focus();toast("Phone needs 10 digits");return;}
+    var ids=Object.keys(picks);
+    var tNames=ids.length?ids.map(function(id){return TREATMENTS.find(function(x){return x.id===id}).name}).join(", "):"General consultation";
+    var dateStr=DOW[selDate.getDay()]+" "+selDate.getDate()+" "+MON[selDate.getMonth()];
+    var msg="Hello LUMIÈRE! I'd like to book a consultation.\n\n"+
+      "Interested in: "+tNames+"\n"+
+      "Preferred slot: "+dateStr+" at "+selSlot+"\n"+
+      "Name: "+name.value.trim()+"\nPhone: "+phone.value.trim()+"\n\n"+
+      "(Free first consultation)";
+    open("https://wa.me/"+WHATSAPP+"?text="+encodeURIComponent(msg),"_blank");
+    document.getElementById("bookFlow").style.display="none";
+    document.getElementById("successText").textContent="Your request for "+dateStr+" at "+selSlot+" is on its way. We'll confirm on WhatsApp within the hour.";
+    document.getElementById("bookSuccess").classList.add("show");
+    toast("Request sent");
+  });
+
+  /* magnetic CTA */
+  if(!prefersReduced&&!isMobile){
+    document.querySelectorAll(".magnetic").forEach(function(b){
+      b.addEventListener("pointermove",function(e){
+        var r=b.getBoundingClientRect();
+        b.style.transform="translate("+((e.clientX-r.left-r.width/2)*0.12)+"px,"+((e.clientY-r.top-r.height/2)*0.18-2)+"px)";
+      });
+      b.addEventListener("pointerleave",function(){b.style.transform="";});
+    });
+  }
+
+  /* gold thread */
+  var mainEl=document.querySelector("main");
+  if(!prefersReduced){
+    var svg=document.createElementNS("http://www.w3.org/2000/svg","svg");svg.id="goldthread";
+    var path=document.createElementNS("http://www.w3.org/2000/svg","path");svg.appendChild(path);
+    mainEl.appendChild(svg);
+    function buildPath(){
+      var h=mainEl.scrollHeight,w=mainEl.clientWidth;
+      svg.setAttribute("viewBox","0 0 "+w+" "+h);svg.style.height=h+"px";
+      var d="M "+(w*0.06)+" 0",y=0,flip=1;
+      while(y<h){y+=560;d+=" Q "+(w*(0.5+0.42*flip))+" "+(y-280)+" "+(w*0.06+(flip>0?0:w*0.88))+" "+y;flip*=-1;}
+      path.setAttribute("d",d);
+      var len=path.getTotalLength();path.style.strokeDasharray=len;path.style.strokeDashoffset=len;path._len=len;
+    }
+    buildPath();addEventListener("resize",buildPath);
+    addEventListener("scroll",function(){
+      var r=mainEl.getBoundingClientRect();
+      var seen=Math.min(Math.max(-r.top+innerHeight*0.85,0),r.height);
+      path.style.strokeDashoffset=path._len*(1-seen/r.height);
+    },{passive:true});
+  }
+
+  /* mobile story */
+  if(isMobile){
+    var story=document.getElementById("mobileStory");
+    document.querySelectorAll("#stage .band").forEach(function(b){if(b.id!=="openBand")story.appendChild(b);});
+    document.getElementById("scrollHint").classList.add("hide");
+    return;
+  }
+
+  /* scrub engine */
+  var video=document.getElementById("heroVideo"),poster=document.getElementById("heroPoster");
+  var journey=document.getElementById("journey"),hint=document.getElementById("scrollHint");
+  var ring=document.getElementById("loadRing"),ringFill=ring.querySelector(".fill");
+  var bands=[].slice.call(document.querySelectorAll("#stage .band"));
+  var videoReady=false,duration=0,displayed=0,target=0,seeking=false,pendingSeek=null,lastSet=-1,rafActive=false;
+
+  function progress(){var r=journey.getBoundingClientRect();return Math.min(Math.max(-r.top/(r.height-innerHeight),0),1);}
+  function updateBands(p){
+    bands.forEach(function(b){var on=p>=parseFloat(b.dataset.from)&&p<parseFloat(b.dataset.to);
+      if(on!==b.classList.contains("on"))b.classList.toggle("on",on);});
+    var hide=p>0.02;if(hide!==hint.classList.contains("hide"))hint.classList.toggle("hide",hide);
+  }
+  function seekTo(t){if(seeking){pendingSeek=t;return}seeking=true;video.currentTime=t;}
+  function onSeeked(){seeking=false;if(pendingSeek!==null){var t=pendingSeek;pendingSeek=null;seekTo(t);}}
+  function loop(){
+    var p=progress();updateBands(p);
+    if(videoReady&&duration>0){
+      target=p*duration;var diff=target-displayed;
+      if(Math.abs(diff)>0.001){
+        displayed+=diff*0.18;if(Math.abs(target-displayed)<0.002)displayed=target;
+        var q=Math.round(displayed*24)/24;
+        if(q!==lastSet){lastSet=q;seekTo(q);}
+        requestAnimationFrame(loop);return;
+      }
+    }
+    rafActive=false;
+  }
+  function wake(){if(!rafActive){rafActive=true;requestAnimationFrame(loop);}}
+  addEventListener("scroll",wake,{passive:true});addEventListener("resize",wake);
+  updateBands(0);
+
+  if(prefersReduced)return;
+
+  /* wait for load + idle so the film never competes with first paint */
+  function whenIdle(fn){
+    if(document.readyState==="complete"){(window.requestIdleCallback||function(f){setTimeout(f,350)})(fn);}
+    else addEventListener("load",function(){(window.requestIdleCallback||function(f){setTimeout(f,350)})(fn);});
+  }
+  whenIdle(function(){
+  fetch("assets/hero.mp4").then(function(res){
+    if(!res.ok)throw new Error("no video");
+    var total=+res.headers.get("Content-Length")||0,got=0;
+    if(total>1500000)ring.classList.add("show");
+    var reader=res.body.getReader(),chunks=[];
+    function pump(){return reader.read().then(function(x){if(x.done)return;
+      chunks.push(x.value);got+=x.value.length;
+      if(total)ringFill.style.strokeDashoffset=126*(1-got/total);return pump();});}
+    return pump().then(function(){return new Blob(chunks,{type:"video/mp4"})});
+  }).then(function(blob){
+    ring.classList.remove("show");
+    video.src=URL.createObjectURL(blob);
+    video.addEventListener("loadedmetadata",function(){
+      duration=video.duration;video.addEventListener("seeked",onSeeked);
+      video.currentTime=0.001;videoReady=true;
+      video.style.opacity=1;poster.style.opacity=0;wake();
+    });
+    video.load();
+  }).catch(function(){ring.classList.remove("show");});
+  });
+})();
+</script>
+</body>
+</html>
